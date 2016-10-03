@@ -1,0 +1,36 @@
+{
+  "name": "drupal/simplemde",
+  "description": "Integrates with SimpleMDE Markdown Editor",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "support": {
+    "issues": "https://drupal.org/project/issues/simplemde",
+    "source": "https://drupal.org/project/simplemde"
+  },
+  "keywords": [
+    "Drupal",
+    "SimpleMDE"
+  ],
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "NextStepWebs/simplemde-markdown-editor",
+        "version": "1.11.2",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/NextStepWebs/simplemde-markdown-editor/archive/1.11.2.zip",
+          "type": "zip"
+        }
+      }
+    }
+  ],
+  "require": {
+    "NextStepWebs/simplemde-markdown-editor": "~1.11"
+  },
+  "autoload": {
+    "psr-4": {
+        "Drupal\\simplemde\\": "src/"
+    }
+  }
+}
