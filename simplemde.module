@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains SimpleMDE module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function simplemde_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the SimpleMDE module.
+    case 'help.page.simplemde':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Integrates with SimpleMDE Markdown Editor.') . '</p>';
+      return $output;
+
+    default:
+  }
+}

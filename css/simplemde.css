@@ -1,0 +1,20 @@
+body.toolbar-fixed.toolbar-horizontal .CodeMirror-fullscreen {
+  top: 130px;
+}
+body.toolbar-fixed.toolbar-horizontal .editor-toolbar.fullscreen {
+  top: 80px;
+}
+body.toolbar-fixed.toolbar-horizontal .editor-preview-side.editor-preview-active-side {
+  top: 80px;
+}
+.js-form-type-textarea {
+  position: relative;
+}
+.js-form-type-textarea .editor-statusbar {
+  position: absolute;
+  top: -10px;
+  right: 0;
+}
+.js-text-format-wrapper .filter-wrapper {
+  overflow: hidden !important;
+}

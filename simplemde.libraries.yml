@@ -1,0 +1,20 @@
+simplemde:
+  remote: https://github.com/NextStepWebs/simplemde-markdown-editor
+  version: 1.11.2
+  license:
+      name: MIT
+      url: https://raw.githubusercontent.com/NextStepWebs/simplemde-markdown-editor/master/LICENSE
+  js:
+    /libraries/simplemde-markdown-editor/dist/simplemde.min.js: { minified: true }
+  css:
+    component:
+      /libraries/simplemde-markdown-editor/dist/simplemde.min.css: { minified: true }
+
+drupal.simplemde:
+  js:
+    js/drupal.simplemde.js: { }
+  css:
+    component:
+      css/simplemde.css: { }
+  dependencies:
+    - simplemde/simplemde

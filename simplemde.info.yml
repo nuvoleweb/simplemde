@@ -1,0 +1,7 @@
+name: SimpleMDE
+type: module
+description: Integrates with SimpleMDE Markdown Editor.
+core: 8.x
+package: Custom
+dependencies:
+  - editor
