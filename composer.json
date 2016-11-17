@@ -28,6 +28,26 @@
   "require": {
     "NextStepWebs/simplemde-markdown-editor": "1.11.2"
   },
+  "require-dev": {
+    "drupal/coder": "8.2.8",
+    "phpunit/phpunit": "5.5.*",
+    "bovigo/assert": "~1.7"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "vendor/bin/phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer",
+      "vendor/bin/phpcs --config-set show_progress 1",
+      "cp scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
+    ],
+    "post-update-cmd": [
+      "vendor/bin/phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer",
+      "vendor/bin/phpcs --config-set show_progress 1",
+      "cp scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
+    ],
+    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries .",
+    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries .",
+    "phpunit": "./vendor/bin/phpunit tests/scr/PhpUnit"
+  },
   "autoload": {
     "psr-4": {
         "Drupal\\simplemde\\": "src/"

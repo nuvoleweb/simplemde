@@ -1,0 +1,13 @@
+language: php
+php:
+  - 5.6
+
+before_install:
+  - composer --verbose self-update
+  - composer --version
+
+install:
+  - composer install
+
+script:
+  - composer phpcs

@@ -144,10 +144,12 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     return $form;
   }
 
+  // @codingStandardsIgnoreStart
   /**
    * {@inheritdoc}
    */
   public function getJSSettings(Editor $editor) {
+    // @codingStandardsIgnoreEnd
     $settings = $editor->getSettings();
     $js_settings = $settings;
     $js_settings['showIcons'] = array_keys(array_filter($settings['showIcons']));
@@ -196,4 +198,5 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
       'guide' => $this->t('Markdown Guide'),
     ];
   }
+
 }
