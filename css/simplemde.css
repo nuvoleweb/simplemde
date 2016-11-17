@@ -1,12 +1,14 @@
 body.toolbar-fixed.toolbar-horizontal .CodeMirror-fullscreen {
   top: 130px;
-  z-index: 1;
+  z-index: 20;
 }
 body.toolbar-fixed.toolbar-horizontal .editor-toolbar.fullscreen {
   top: 80px;
+  z-index: 20;
 }
 body.toolbar-fixed.toolbar-horizontal .editor-preview-side.editor-preview-active-side {
   top: 80px;
+  z-index: 20;
 }
 .js-form-type-textarea {
   position: relative;
