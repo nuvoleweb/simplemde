@@ -90,28 +90,28 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
    */
   public function getDefaultSettings() {
     return [
-      'spellChecker' => FALSE,
-      'promptURLs' => FALSE,
-      'showIcons' => [
-        'heading' => TRUE,
-        'heading-smaller' => TRUE,
-        'heading-bigger' => TRUE,
-        'heading-1' => TRUE,
-        'heading-2' => TRUE,
-        'heading-3' => TRUE,
-        'code' => TRUE,
-        'quote' => TRUE,
-        'unordered-list' => TRUE,
-        'ordered-list' => TRUE,
-        'clean-block' => TRUE,
-        'link' => TRUE,
-        'image' => TRUE,
-        'table' => TRUE,
-        'horizontal-rule' => TRUE,
-        'preview' => TRUE,
-        'side-by-side' => TRUE,
-        'fullscreen' => TRUE,
-        'guide' => TRUE,
+      'spell_checker' => FALSE,
+      'prompt_urls' => FALSE,
+      'show_icons' => [
+        'heading',
+        'heading-smaller',
+        'heading-bigger',
+        'heading-1',
+        'heading-2',
+        'heading-3',
+        'code',
+        'quote',
+        'unordered-list',
+        'ordered-list',
+        'clean-block',
+        'link',
+        'image',
+        'table',
+        'horizontal-rule',
+        'preview',
+        'side-by-side',
+        'fullscreen',
+        'guide',
       ],
     ];
   }
@@ -122,26 +122,36 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   public function settingsForm(array $form, FormStateInterface $form_state, Editor $editor) {
     $settings = $editor->getSettings();
 
-    $form['spellChecker'] = [
+    $form['spell_checker'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Spellchecker'),
       '#description' => $this->t('If set enables the spell checker.'),
-      '#default_value' => $settings['spellChecker'],
+      '#default_value' => $settings['spell_checker'],
     ];
-    $form['promptURLs'] = [
+    $form['prompt_urls'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Prompt URLs'),
       '#description' => $this->t('If set an alert window appears asking for the link or image URL.'),
-      '#default_value' => $settings['promptURLs'],
+      '#default_value' => $settings['prompt_urls'],
     ];
-    $form['showIcons'] = [
+    $form['show_icons'] = [
       '#title' => $this->t('Available buttons'),
       '#type' => 'checkboxes',
       '#required' => TRUE,
       '#options' => $this->getButtons(),
-      '#default_value' => $settings['showIcons'],
+      '#default_value' => $settings['show_icons'],
     ];
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsFormSubmit(array $form, FormStateInterface $form_state) {
+    // Clean up configuration.
+    $show_icon_key = ['editor', 'settings', 'show_icons'];
+    $show_icons = $form_state->getValue($show_icon_key);
+    $form_state->setValue($show_icon_key, array_keys(array_filter($show_icons)));
   }
 
   // @codingStandardsIgnoreStart
@@ -152,9 +162,9 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     // @codingStandardsIgnoreEnd
     $settings = $editor->getSettings();
     $js_settings = $settings;
-    $js_settings['showIcons'] = array_keys(array_filter($settings['showIcons']));
-    $js_settings['spellChecker'] = (bool) $js_settings['spellChecker'];
-    $js_settings['promptURLs'] = (bool) $js_settings['promptURLs'];
+    $js_settings['showIcons'] = $settings['show_icons'];
+    $js_settings['spellChecker'] = (bool) $js_settings['spell_checker'];
+    $js_settings['promptURLs'] = (bool) $js_settings['prompt_urls'];
     return $js_settings;
   }
 
