@@ -138,7 +138,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
       '#title' => $this->t('Available buttons'),
       '#type' => 'checkboxes',
       '#required' => TRUE,
-      '#options' => $this->getButtons(),
+      '#options' => $this->getAvailableIcons(),
       '#default_value' => $settings['show_icons'],
     ];
     return $form;
@@ -161,8 +161,13 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   public function getJSSettings(Editor $editor) {
     // @codingStandardsIgnoreEnd
     $settings = $editor->getSettings();
-    $js_settings = $settings;
-    $js_settings['showIcons'] = $settings['show_icons'];
+
+    $js_settings['showIcons'] = (array) $settings['show_icons'];
+    $js_settings['hideIcons'] = array_keys($this->getAvailableIcons());
+    $js_settings['hideIcons'] = array_filter($js_settings['hideIcons'], function ($icon) use ($settings) {
+      return !(isset($settings['show_icons']) && is_array($settings['show_icons']) && in_array($icon, $settings['show_icons']));
+    });
+    $js_settings['hideIcons'] = array_values($js_settings['hideIcons']);
     $js_settings['spellChecker'] = (bool) $js_settings['spell_checker'];
     $js_settings['promptURLs'] = (bool) $js_settings['prompt_urls'];
     return $js_settings;
@@ -183,9 +188,9 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
    * Return set of available icons.
    *
    * @return array
-   *    List of icons with value.
+   *    List of icons with label.
    */
-  protected function getButtons() {
+  protected function getAvailableIcons() {
     return [
       'heading' => $this->t('Heading'),
       'heading-smaller' => $this->t('Smaller Heading'),
