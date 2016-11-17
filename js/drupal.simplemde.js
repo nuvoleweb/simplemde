@@ -24,10 +24,15 @@
      *   Whether the editor was successfully attached.
      */
     attach: function (element, format) {
-      var settings = format.editorSettings;
-      settings.element = document.getElementById(element.id);
-      var editor = new SimpleMDE(settings);
-      return !!editor;
+      var textarea = document.getElementById(element.id);
+      if(!textarea.classList.contains('simplemde-processed')) {
+        textarea.classList.add('simplemde-processed');
+        var settings = format.editorSettings;
+        settings.element = textarea;
+        settings.forceSync = true;
+        var editor = new SimpleMDE(settings);
+        return !!editor;
+      }
     },
 
     /**
@@ -56,7 +61,7 @@
      *   Callback called with the value of the editor.
      */
     onChange: function (element, callback) {
-
+      callback();
     }
 
   };
