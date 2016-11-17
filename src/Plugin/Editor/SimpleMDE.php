@@ -162,14 +162,15 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     // @codingStandardsIgnoreEnd
     $settings = $editor->getSettings();
 
-    $js_settings['showIcons'] = (array) $settings['show_icons'];
-    $js_settings['hideIcons'] = array_keys($this->getAvailableIcons());
-    $js_settings['hideIcons'] = array_filter($js_settings['hideIcons'], function ($icon) use ($settings) {
+    $hide = array_keys($this->getAvailableIcons());
+    $hide = array_filter($hide, function ($icon) use ($settings) {
       return !(isset($settings['show_icons']) && is_array($settings['show_icons']) && in_array($icon, $settings['show_icons']));
     });
-    $js_settings['hideIcons'] = array_values($js_settings['hideIcons']);
-    $js_settings['spellChecker'] = (bool) $js_settings['spell_checker'];
-    $js_settings['promptURLs'] = (bool) $js_settings['prompt_urls'];
+
+    $js_settings['hideIcons'] = array_values($hide);
+    $js_settings['showIcons'] = (array) $settings['show_icons'];
+    $js_settings['spellChecker'] = (bool) $settings['spell_checker'];
+    $js_settings['promptURLs'] = (bool) $settings['prompt_urls'];
     return $js_settings;
   }
 
