@@ -1,5 +1,6 @@
 body.toolbar-fixed.toolbar-horizontal .CodeMirror-fullscreen {
   top: 130px;
+  z-index: 1;
 }
 body.toolbar-fixed.toolbar-horizontal .editor-toolbar.fullscreen {
   top: 80px;
