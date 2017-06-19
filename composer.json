@@ -44,8 +44,8 @@
       "vendor/bin/phpcs --config-set show_progress 1",
       "cp scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
     ],
-    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries .",
-    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries .",
+    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries,README.md .",
+    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries,README.md .",
     "phpunit": "./vendor/bin/phpunit tests/scr/PhpUnit"
   },
   "autoload": {
