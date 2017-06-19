@@ -189,7 +189,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
    * Return set of available icons.
    *
    * @return array
-   *    List of icons with label.
+   *   List of icons with label.
    */
   protected function getAvailableIcons() {
     return [
