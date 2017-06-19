@@ -29,7 +29,7 @@
     "sparksuite/simplemde-markdown-editor": "1.11.2"
   },
   "require-dev": {
-    "drupal/coder": "8.2.8",
+    "drupal/coder": "8.2.12",
     "phpunit/phpunit": "5.5.*",
     "bovigo/assert": "~1.7"
   },
