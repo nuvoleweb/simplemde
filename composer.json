@@ -15,21 +15,21 @@
     {
       "type": "package",
       "package": {
-        "name": "NextStepWebs/simplemde-markdown-editor",
+        "name": "sparksuite/simplemde-markdown-editor",
         "version": "1.11.2",
         "type": "drupal-library",
         "dist": {
-          "url": "https://github.com/NextStepWebs/simplemde-markdown-editor/archive/1.11.2.zip",
+          "url": "https://github.com/sparksuite/simplemde-markdown-editor/archive/1.11.2.zip",
           "type": "zip"
         }
       }
     }
   ],
   "require": {
-    "NextStepWebs/simplemde-markdown-editor": "1.11.2"
+    "sparksuite/simplemde-markdown-editor": "1.11.2"
   },
   "require-dev": {
-    "drupal/coder": "8.2.8",
+    "drupal/coder": "8.2.12",
     "phpunit/phpunit": "5.5.*",
     "bovigo/assert": "~1.7"
   },
@@ -44,8 +44,8 @@
       "vendor/bin/phpcs --config-set show_progress 1",
       "cp scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
     ],
-    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries .",
-    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries .",
+    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries,README.md .",
+    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,install,inc,theme --ignore=vendor,libraries,README.md .",
     "phpunit": "./vendor/bin/phpunit tests/scr/PhpUnit"
   },
   "autoload": {
