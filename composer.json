@@ -12,21 +12,9 @@
     "SimpleMDE"
   ],
   "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "sparksuite/simplemde-markdown-editor",
-        "version": "1.11.2",
-        "type": "drupal-library",
-        "dist": {
-          "url": "https://github.com/sparksuite/simplemde-markdown-editor/archive/1.11.2.zip",
-          "type": "zip"
-        }
-      }
-    }
+    
   ],
   "require": {
-    "sparksuite/simplemde-markdown-editor": "1.11.2"
   },
   "require-dev": {
     "drupal/coder": "8.2.12",
