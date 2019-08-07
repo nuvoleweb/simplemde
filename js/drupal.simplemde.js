@@ -31,6 +31,10 @@
         settings.element = textarea;
         settings.forceSync = true;
         var editor = new SimpleMDE(settings);
+        // Html5 and JS validation will break for our now display=none textarea, switch it off.
+        // @todo Remove this once fixed upstream: https://github.com/sparksuite/simplemde-markdown-editor/issues/324
+        textarea.removeAttribute('required');
+        textarea.removeAttribute('pattern');
         return !!editor;
       }
     },
