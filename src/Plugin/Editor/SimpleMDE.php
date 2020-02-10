@@ -88,8 +88,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultSettings()
-  {
+  public function getDefaultSettings() {
     return [
       'image_upload' => [
         'status' => true
