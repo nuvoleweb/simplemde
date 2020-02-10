@@ -91,7 +91,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   public function getDefaultSettings() {
     return [
       'image_upload' => [
-        'status' => true
+        'status' => TRUE
       ],
       'spell_checker' => FALSE,
       'prompt_urls' => FALSE,
