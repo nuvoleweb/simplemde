@@ -165,7 +165,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
       'editor',
       'settings',
       'image_upload_section',
-      'image_upload'
+      'image_upload',
     ]);
     $form_state->get('editor')->setImageUploadSettings($settings);
   }
