@@ -161,7 +161,12 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     $show_icon_key = ['editor', 'settings', 'show_icons'];
     $show_icons = $form_state->getValue($show_icon_key);
     $form_state->setValue($show_icon_key, array_keys(array_filter($show_icons)));
-    $settings = &$form_state->getValue(['editor', 'settings', 'image_upload_section', 'image_upload']);
+    $settings = &$form_state->getValue([
+      'editor',
+      'settings',
+      'image_upload_section',
+      'image_upload'
+    ]);
     $form_state->get('editor')->setImageUploadSettings($settings);
   }
 
