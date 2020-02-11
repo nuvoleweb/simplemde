@@ -126,8 +126,11 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     $settings = $editor->getSettings();
 
     $form_state->loadInclude('editor', 'admin.inc');
-    $form['image_upload'] = editor_image_upload_settings_form($editor);
-
+    $form['image_upload_section'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Image Upload'),
+    ];
+    $form['image_upload_section']['image_upload'] = editor_image_upload_settings_form($editor);
     $form['spell_checker'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Spellchecker'),
@@ -158,7 +161,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     $show_icon_key = ['editor', 'settings', 'show_icons'];
     $show_icons = $form_state->getValue($show_icon_key);
     $form_state->setValue($show_icon_key, array_keys(array_filter($show_icons)));
-    $settings = &$form_state->getValue(['editor', 'settings', 'image_upload']);
+    $settings = &$form_state->getValue(['editor', 'settings', 'image_upload_section', 'image_upload']);
     $form_state->get('editor')->setImageUploadSettings($settings);
   }
 
