@@ -90,8 +90,10 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
    */
   public function getDefaultSettings() {
     return [
+      'image_upload' => [
+        'status' => TRUE,
+      ],
       'spell_checker' => FALSE,
-      'prompt_urls' => FALSE,
       'show_icons' => [
         'heading',
         'heading-smaller',
@@ -122,17 +124,17 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   public function settingsForm(array $form, FormStateInterface $form_state, Editor $editor) {
     $settings = $editor->getSettings();
 
+    $form_state->loadInclude('editor', 'admin.inc');
+    $form['image_upload_section'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Image Upload'),
+    ];
+    $form['image_upload_section']['image_upload'] = editor_image_upload_settings_form($editor);
     $form['spell_checker'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Spellchecker'),
       '#description' => $this->t('If set enables the spell checker.'),
       '#default_value' => $settings['spell_checker'],
-    ];
-    $form['prompt_urls'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Prompt URLs'),
-      '#description' => $this->t('If set an alert window appears asking for the link or image URL.'),
-      '#default_value' => $settings['prompt_urls'],
     ];
     $form['show_icons'] = [
       '#title' => $this->t('Available buttons'),
@@ -152,6 +154,13 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     $show_icon_key = ['editor', 'settings', 'show_icons'];
     $show_icons = $form_state->getValue($show_icon_key);
     $form_state->setValue($show_icon_key, array_keys(array_filter($show_icons)));
+    $settings = &$form_state->getValue([
+      'editor',
+      'settings',
+      'image_upload_section',
+      'image_upload',
+    ]);
+    $form_state->get('editor')->setImageUploadSettings($settings);
   }
 
   // @codingStandardsIgnoreStart
@@ -162,15 +171,8 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     // @codingStandardsIgnoreEnd
     $settings = $editor->getSettings();
 
-    $hide = array_keys($this->getAvailableIcons());
-    $hide = array_filter($hide, function ($icon) use ($settings) {
-      return !(isset($settings['show_icons']) && is_array($settings['show_icons']) && in_array($icon, $settings['show_icons']));
-    });
-
-    $js_settings['hideIcons'] = array_values($hide);
     $js_settings['showIcons'] = (array) $settings['show_icons'];
     $js_settings['spellChecker'] = (bool) $settings['spell_checker'];
-    $js_settings['promptURLs'] = (bool) $settings['prompt_urls'];
     return $js_settings;
   }
 
