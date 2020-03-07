@@ -27,21 +27,8 @@
       var textarea = document.getElementById(element.id);
       if (!textarea.classList.contains('simplemde-processed')) {
         textarea.classList.add('simplemde-processed');
-        var settings = format.editorSettings;
-        settings.element = textarea;
-        settings.forceSync = true;
-        var toolbar = settings.showIcons.map(function (name) {
-          if (name === 'image') {
-            return {
-              name: "drupalimage",
-              action: function (editor) { Drupal.simplemde.handleImageUpload(editor, format); },
-              className: "fa fa-picture-o",
-              title: "Insert Image",
-            };
-          }
-          return name;
-        });
-        var editor = new SimpleMDE({ toolbar: toolbar, forceSync: true, element: textarea, spellChecker: settings.spellChecker });
+        var settings = getEditorSettings(textarea, format);
+        var editor = new SimpleMDE(settings);
         return !!editor;
       }
     },
@@ -78,8 +65,8 @@
   };
 
   Drupal.simplemde = {
-    saveCallback: null,  
-    handleImageUpload: function (editor, format) {
+    saveCallback: null,
+    handleImage: function (editor, formatName) {
       const dialogSettings = {
         title: "Insert Image",
         dialogClass: "editor-image-dialog ui-dialog--narrow",
@@ -91,7 +78,7 @@
         dialog: dialogSettings,
         dialogType: 'modal',
         selector: '.simplemde-dialog-loading-link',
-        url: '/editor/dialog/image/' + format.format,
+        url: '/editor/dialog/image/' + formatName,
         progress: { type: 'throbber' },
         submit: {
           editor_object: existingValues
@@ -100,12 +87,70 @@
       simplemdeAjaxDialog.execute();
       Drupal.simplemde.saveCallback = function (data) {
         var cm = editor.codemirror;
-        var output = '';
-        output = '![' + data.attributes.alt + '](' + data.attributes.src + ')';
+        var output = '![' + data.attributes.alt + '](' + data.attributes.src + ')';
+        cm.replaceSelection(output);
+      };
+    },
+    handleLink: function (editor, formatName) {
+      const dialogSettings = {
+        title: "Insert Link",
+        dialogClass: "editor-link-dialog ui-dialog--narrow",
+        autoResize: true,
+        width: "auto"
+      };
+      const existingValues = { text: '', href: '' };
+      var simplemdeAjaxDialog = Drupal.ajax({
+        dialog: dialogSettings,
+        dialogType: 'modal',
+        selector: '.simplemde-dialog-loading-link',
+        url: '/editor/dialog/link/' + formatName,
+        progress: { type: 'throbber' },
+        submit: {
+          editor_object: existingValues
+        }
+      });
+      simplemdeAjaxDialog.execute();
+      Drupal.simplemde.saveCallback = function (data) {
+        var cm = editor.codemirror;
+        var text = cm.getSelection();
+        if(text.length === 0){
+          text = Drupal.t('enter link title here');
+        }
+        var output = '[' + text + '](' + data.attributes.href + ')';
         cm.replaceSelection(output);
       };
     }
   };
+
+  function getEditorSettings(textarea, format) {
+    const editorSettings = format.editorSettings;
+    var toolbar = editorSettings.showIcons.map(function (name) {
+      if (name === 'image') {
+        return {
+          name: "drupalimage",
+          action: function (editor) { Drupal.simplemde.handleImage(editor, format.format); },
+          className: "fa fa-picture-o",
+          title: "Insert Image",
+        };
+      } else if(name === 'link'){
+        return {
+          name: "drupallink",
+          action: function (editor) { Drupal.simplemde.handleLink(editor, format.format); },
+          className: "fa fa-link",
+          title: "Insert Link",
+        };
+      }
+      return name;
+    });
+    var settings = { toolbar: toolbar, forceSync: true, element: textarea };
+    var excludeSettings = ['showIcons'];// showIcons is converted into toolbar
+    for (var config in editorSettings) {
+      if (excludeSettings.indexOf(config) === -1) {
+        settings[config] = editorSettings[config];
+      }
+    }
+    return settings;
+  }
 
   $(window).on('editor:dialogsave', function (e, values) {
     if (Drupal.simplemde.saveCallback) {

@@ -94,7 +94,6 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
         'status' => TRUE,
       ],
       'spell_checker' => FALSE,
-      'prompt_urls' => FALSE,
       'show_icons' => [
         'heading',
         'heading-smaller',
@@ -137,12 +136,6 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
       '#description' => $this->t('If set enables the spell checker.'),
       '#default_value' => $settings['spell_checker'],
     ];
-    $form['prompt_urls'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Prompt URLs'),
-      '#description' => $this->t('If set an alert window appears asking for the link or image URL.'),
-      '#default_value' => $settings['prompt_urls'],
-    ];
     $form['show_icons'] = [
       '#title' => $this->t('Available buttons'),
       '#type' => 'checkboxes',
@@ -178,15 +171,8 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
     // @codingStandardsIgnoreEnd
     $settings = $editor->getSettings();
 
-    $hide = array_keys($this->getAvailableIcons());
-    $hide = array_filter($hide, function ($icon) use ($settings) {
-      return !(isset($settings['show_icons']) && is_array($settings['show_icons']) && in_array($icon, $settings['show_icons']));
-    });
-
-    $js_settings['hideIcons'] = array_values($hide);
     $js_settings['showIcons'] = (array) $settings['show_icons'];
     $js_settings['spellChecker'] = (bool) $settings['spell_checker'];
-    $js_settings['promptURLs'] = (bool) $settings['prompt_urls'];
     return $js_settings;
   }
 
