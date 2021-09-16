@@ -1,6 +1,6 @@
 {
   "name": "drupal/simplemde",
-  "description": "Integrates with SimpleMDE Markdown Editor",
+  "description": "Integrates with Easy Markdown Editor",
   "type": "drupal-module",
   "license": "GPL-2.0+",
   "support": {
@@ -15,23 +15,23 @@
     {
       "type": "package",
       "package": {
-        "name": "sparksuite/simplemde-markdown-editor",
-        "version": "1.11.2",
+        "name": "ionaru/easy-markdown-editor",
+        "version": "2.15.0",
         "type": "drupal-library",
         "dist": {
-          "url": "https://github.com/sparksuite/simplemde-markdown-editor/archive/1.11.2.zip",
-          "type": "zip"
+          "url": "https://registry.npmjs.org/easymde/-/easymde-2.15.0.tgz",
+          "type": "tar"
         }
       }
     }
   ],
   "require": {
-    "sparksuite/simplemde-markdown-editor": "1.11.2"
+    "ionaru/easy-markdown-editor": "2.15.0"
   },
   "require-dev": {
-    "drupal/coder": "8.2.12",
-    "phpunit/phpunit": "5.5.*",
-    "bovigo/assert": "~1.7"
+    "drupal/coder": "8.3.13",
+    "phpunit/phpunit": "9.*",
+    "bovigo/assert": "^6.2"
   },
   "scripts": {
     "post-install-cmd": [

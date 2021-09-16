@@ -1,9 +1,9 @@
 /**
  * @file
- * SimpleMDE implementation of {@link Drupal.editors} API.
+ * EasyMDE implementation of {@link Drupal.editors} API.
  */
 
-(function (Drupal, SimpleMDE) {
+(function (Drupal, EasyMDE) {
 
   'use strict';
 
@@ -25,12 +25,12 @@
      */
     attach: function (element, format) {
       var textarea = document.getElementById(element.id);
-      if(!textarea.classList.contains('simplemde-processed')) {
-        textarea.classList.add('simplemde-processed');
+      if(!textarea.classList.contains('easymde-processed')) {
+        textarea.classList.add('easymde-processed');
         var settings = format.editorSettings;
         settings.element = textarea;
         settings.forceSync = true;
-        var editor = new SimpleMDE(settings);
+        var editor = new EasyMDE(settings);
         return !!editor;
       }
     },
@@ -66,4 +66,4 @@
 
   };
 
-})(Drupal, SimpleMDE);
+})(Drupal, EasyMDE);

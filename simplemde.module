@@ -16,7 +16,7 @@ function simplemde_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.simplemde':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Integrates with SimpleMDE Markdown Editor.') . '</p>';
+      $output .= '<p>' . t('Integrates with Easy Markdown Editor.') . '</p>';
       return $output;
 
     default:
