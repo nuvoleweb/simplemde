@@ -1,20 +1,20 @@
-simplemde:
-  remote: https://github.com/NextStepWebs/simplemde-markdown-editor
-  version: 1.11.2
+easymde:
+  remote: https://github.com/Ionaru/easy-markdown-editor
+  version: 2.15.0
   license:
       name: MIT
-      url: https://raw.githubusercontent.com/NextStepWebs/simplemde-markdown-editor/master/LICENSE
+      url: https://raw.githubusercontent.com/Ionaru/easy-markdown-editor/master/LICENSE
   js:
-    /libraries/simplemde-markdown-editor/dist/simplemde.min.js: { minified: true }
+    /libraries/easy-markdown-editor/dist/easymde.min.js: { minified: true }
   css:
     component:
-      /libraries/simplemde-markdown-editor/dist/simplemde.min.css: { minified: true }
+      /libraries/easy-markdown-editor/dist/easymde.min.css: { minified: true }
 
-drupal.simplemde:
+drupal.easymde:
   js:
-    js/drupal.simplemde.js: { }
+    js/drupal.easymde.js: { }
   css:
     component:
-      css/simplemde.css: { }
+      css/easymde.css: { }
   dependencies:
-    - simplemde/simplemde
+    - simplemde/easymde

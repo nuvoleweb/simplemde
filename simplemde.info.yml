@@ -1,8 +1,7 @@
-name: SimpleMDE
+name: EasyMDE (SimpleMDE)
 type: module
-description: Integrates with SimpleMDE Markdown Editor.
-core: 8.x
+description: Integrates with Easy Markdown Editor.
+core_version_requirement: ^8.9 || ^9
 package: Custom
 dependencies:
   - drupal:editor
-  - drupal:markdown

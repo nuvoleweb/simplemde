@@ -12,11 +12,11 @@ use Drupal\editor\Entity\Editor;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Defines a SimpleMDE-based text editor for Drupal.
+ * Defines a EasyMDE-based text editor for Drupal.
  *
  * @Editor(
  *   id = "simplemde",
- *   label = @Translation("SimpleMDE"),
+ *   label = @Translation("EasyMDE"),
  *   supports_content_filtering = TRUE,
  *   supports_inline_editing = TRUE,
  *   is_xss_safe = FALSE,
@@ -119,7 +119,8 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state, Editor $editor) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $editor = $form_state->get('editor');
     $settings = $editor->getSettings();
 
     $form['spell_checker'] = [
@@ -147,7 +148,7 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function settingsFormSubmit(array $form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     // Clean up configuration.
     $show_icon_key = ['editor', 'settings', 'show_icons'];
     $show_icons = $form_state->getValue($show_icon_key);
@@ -179,8 +180,8 @@ class SimpleMDE extends EditorBase implements ContainerFactoryPluginInterface {
    */
   public function getLibraries(Editor $editor) {
     $libraries = [
-      'simplemde/simplemde',
-      'simplemde/drupal.simplemde',
+      'simplemde/easymde',
+      'simplemde/drupal.easymde',
     ];
     return $libraries;
   }
